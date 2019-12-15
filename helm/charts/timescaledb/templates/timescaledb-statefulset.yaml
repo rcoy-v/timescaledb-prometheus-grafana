@@ -6,7 +6,7 @@ metadata:
   labels:
     app: {{ .Chart.Name }}
 spec:
-  replicas: 2
+  replicas: 1
   updateStrategy:
     type: RollingUpdate
   selector:
@@ -29,3 +29,19 @@ spec:
           env:
             - name: POSTGRES_PASSWORD
               value: secret
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: pgdata
+  volumeClaimTemplates:
+    - metadata:
+        name: pgdata
+        namespace: {{ .Values.global.namespace }}
+      spec:
+        storageClassName: local-path
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
