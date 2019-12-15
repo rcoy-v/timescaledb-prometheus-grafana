@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Chart.Name }}
+  namespace: {{ .Values.global.namespace }}
+  labels:
+    app: {{ .Chart.Name }}
+data:
+  datasource.yaml: |
+    {{ .Files.Get "files/datasource.yaml" | nindent 4 }}

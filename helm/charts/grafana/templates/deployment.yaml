@@ -12,6 +12,8 @@ spec:
       app: {{ .Chart.Name }}
   template:
     metadata:
+      annotations:
+        checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
       labels:
         app: {{ .Chart.Name }}
     spec:
@@ -27,4 +29,10 @@ spec:
             - name: http
               containerPort: {{ .Values.port }}
               protocol: TCP
-
+          volumeMounts:
+            - mountPath: /etc/grafana/provisioning/datasources
+              name: config
+      volumes:
+        - name: config
+          configMap:
+            name: {{ .Chart.Name }}
