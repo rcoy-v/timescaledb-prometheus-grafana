@@ -1,6 +1,6 @@
 # timescaledb-prometheus-grafana
 
-Testing deployment of using [TimescaleDB](https://www.timescale.com/) as
+Testing integration of [TimescaleDB](https://www.timescale.com/) as
 remote storage for [Prometheus](https://prometheus.io/) and
 [Grafana](https://grafana.com/) datasource.
 
