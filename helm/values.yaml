@@ -1,0 +1,12 @@
+global:
+  namespace: timescaledb-prometheus-grafana
+grafana:
+  port: 3000
+prometheus:
+  port: 9090
+timescaledb:
+  postgres:
+    port: 5432
+  adapter:
+    name: prom-pg-adapter
+    port: 9201

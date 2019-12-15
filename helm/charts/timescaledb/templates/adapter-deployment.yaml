@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.adapter.name }}
+  namespace: {{ .Values.global.namespace }}
+  labels:
+    app: {{ .Values.adapter.name}}
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {{ .Values.adapter.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.adapter.name}}
+    spec:
+      containers:
+        - name: prom-pg-adapter
+          image: timescale/prometheus-postgresql-adapter:0.6.0
+          args:
+            - -pg-host={{ .Chart.Name }}
+            - -pg-password=secret
+            - -pg-prometheus-log-samples
+          ports:
+            - name: http
+              containerPort: {{ .Values.adapter.port }}
+              protocol: TCP
