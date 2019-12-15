@@ -33,4 +33,5 @@ Using [k3s](https://k3s.io/) for local Kubernetes cluster.
    -  username: `admin`
    -  password: `secret`
 
-
+TimescaleDB will already be configured as a datasource. Explore tab or a
+new dashboard can be used to test timescaledb.
